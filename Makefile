@@ -2,6 +2,8 @@
 #   export PATH="$(realpath "$(dirname "$(realpath "$(which ccache)")")/../libexec"):${PATH}"
 #   make server
 #   make client
+#   make server-wss
+#   make client-wss
 
 CXX=c++
 CXXFLAGS=-std=c++14 -I/usr/local/include -I. -fPIC -pthread -I/usr/local/Cellar/ice36/3.6.4/include
@@ -17,12 +19,20 @@ build:
 	@$(CXX) $(CXXFLAGS) $(LDFLAGS) DemoClientApp.cpp Demo.cpp -o DemoClientApp
 
 client: build
-	@echo "Starting client"
+	@echo "Starting client (WS)"
 	@./DemoClientApp --Ice.Config=config.client
 
+client-wss: build
+	@echo "Starting client (WSS)"
+	@./DemoClientApp --Ice.Config=config.client,config.client-wss
+
 server: kill build
-	@echo "Starting server"
+	@echo "Starting server (WS)"
 	@icebox --Ice.Config=config.icebox
+
+server-wss: kill build
+	@echo "Starting server (WSS)"
+	@icebox --Ice.Config=config.icebox,config.icebox-wss
 
 kill:
 	@echo "Kill all"

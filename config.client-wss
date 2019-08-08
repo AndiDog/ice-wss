@@ -1,0 +1,14 @@
+Ice.Default.Protocol=wss
+
+Ice.Override.Secure=1
+Ice.Plugin.IceSSL=IceSSL:createIceSSL
+IceSSL.Protocols=tlsv1_2,tlsv1_1,tlsv1
+# Disable Diffie-Hellman so Wireshark can be used to see decrypted traffic. The example value
+# of `RSA_WITH_AES_128_CBC_SHA` is for macoS (Secure Transport API, see Ice source code
+# at `cpp/src/IceSSL/SecureTransportEngine.cpp` for supported values)
+IceSSL.Ciphers=RSA_WITH_AES_128_CBC_SHA
+
+IceSSL.DefaultDir=pki
+IceSSL.CertFile=the-client.p12
+IceSSL.Password=dummy
+IceSSL.CAs=ice-ca.crt

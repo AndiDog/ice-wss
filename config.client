@@ -6,3 +6,4 @@ Ice.StdErr=
 Ice.StdOut=
 
 DemoInterface.Proxy=DemoObject:default -p 10000
+DemoInterface.Proxy.InvocationTimeout=2500

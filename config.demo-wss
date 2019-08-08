@@ -1,0 +1,15 @@
+Ice.Default.Protocol=wss
+
+Ice.Override.Secure=1
+Ice.Plugin.IceSSL=IceSSL:createIceSSL
+IceSSL.Protocols=tlsv1_2,tlsv1_1,tlsv1
+# Allow any cipher so the client can decide (see `config.client-wss`)
+IceSSL.Ciphers=ALL
+
+IceSSL.DefaultDir=pki
+IceSSL.CertFile=the-server.p12
+IceSSL.Password=dummy
+IceSSL.CAs=ice-ca.crt
+
+IceSSL.TrustOnly.Server=CN="the-client"
+IceSSL.TrustOnly.Client=

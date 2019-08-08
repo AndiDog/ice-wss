@@ -1,0 +1,1 @@
+IceBox.Service.DemoService=DemoService:create --Ice.Config=config.demo,config.demo-wss
