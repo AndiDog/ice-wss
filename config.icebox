@@ -1,0 +1,17 @@
+Ice.IPv6=0
+
+Ice.Default.Protocol=dummy
+
+# Not in an Ice Grid, so controlling the IceBox process is not necessary from anywhere
+Ice.Admin.Endpoints=
+
+Ice.ThreadPool.Server.Size=20
+Ice.ThreadPool.Server.SizeMax=400
+Ice.ThreadPool.Server.SizeWarn=300
+Ice.MessageSizeMax=20480
+IceBox.Trace.ServiceObserver=1
+
+Ice.StdErr=
+Ice.StdOut=
+
+IceBox.Service.DemoService=DemoService:create --Ice.Config=config.demo

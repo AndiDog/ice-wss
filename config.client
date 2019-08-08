@@ -1,0 +1,8 @@
+Ice.IPv6=0
+
+Ice.Default.Protocol=ws
+
+Ice.StdErr=
+Ice.StdOut=
+
+DemoInterface.Proxy=DemoObject:default -p 10000
