@@ -13,8 +13,11 @@ LDFLAGS=
 # ICE_HOME=/usr/local/Cellar/ice36/3.6.4
 ICE_HOME=/Users/asommer/dev/extern/ice/cpp
 # ICE_HOME=/Users/asommer/dev/extern/ice-3.7.1/cpp
+# ICE_HOME=/Users/asommer/dev/extern/ice-3.6.3/cpp
+# ICE_HOME=/Users/asommer/dev/extern/ice-3.6.4/cpp
 # ICE_HOME=/tmp/Ice-3.7.1
 # ICE_HOME=/tmp/Ice-3.6.4
+# ICE_HOME=/tmp/Ice-3.6.3
 # ICE_HOME=/usr/local
 
 # `include/generated` is for source builds

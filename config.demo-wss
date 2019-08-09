@@ -13,3 +13,6 @@ IceSSL.CAs=ice-ca.crt
 
 IceSSL.TrustOnly.Server=CN="the-client"
 IceSSL.TrustOnly.Client=
+IceSSL.VerifyPeer.Server=2
+
+IceSSL.Trace.Security=1

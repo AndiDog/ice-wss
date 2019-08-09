@@ -5,5 +5,5 @@ Ice.Default.Protocol=ws
 Ice.StdErr=
 Ice.StdOut=
 
-DemoInterface.Proxy=DemoObject:default -p 10000
+DemoInterface.Proxy=DemoObject:default -h localhost -p 10000
 DemoInterface.Proxy.InvocationTimeout=2500

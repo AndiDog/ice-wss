@@ -14,4 +14,5 @@ openssl req -config ${ca_name}.openssl.cnf -key ${ca_name}/private/ca.key -new -
 # Server/client certificates (script currently does not distinguish these or use subjectAltName; do not use in
 # production like this!)
 ./create-ice-cert.sh "${ca_name}" the-server
+./create-ice-cert.sh "${ca_name}" the-server2 # for playing around with `IceSSL.TrustOnly*`
 ./create-ice-cert.sh "${ca_name}" the-client

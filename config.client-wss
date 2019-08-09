@@ -12,3 +12,12 @@ IceSSL.DefaultDir=pki
 IceSSL.CertFile=the-client.p12
 IceSSL.Password=dummy
 IceSSL.CAs=ice-ca.crt
+
+# Test new SNI feature
+IceSSL.Trace.Security=1
+IceSSL.ServerNameIndication=1
+# if peer certificate's CN/subjectAltName doesn't match the hostname but is an invented name,
+# disable peer hostname verification (`IceSSL.TrustOnly*` will still apply)
+IceSSL.VerifyPeer.Client=0
+
+IceSSL.TrustOnly.Client=CN="the-server"
