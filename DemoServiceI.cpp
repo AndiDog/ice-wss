@@ -22,7 +22,11 @@ public:
 	void start(const std::string& name, const Ice::CommunicatorPtr& communicator, const Ice::StringSeq&)
 	{
 		_adapter = communicator->createObjectAdapter(name);
+#if ICE_INT_VERSION / 100 >= 307
+		_adapter->add(new DemoInterfaceI(), Ice::stringToIdentity("DemoObject"));
+#else
 		_adapter->add(new DemoInterfaceI(), communicator->stringToIdentity("DemoObject"));
+#endif
 		_adapter->activate();
 	}
 
