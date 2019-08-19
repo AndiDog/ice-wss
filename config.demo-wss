@@ -13,6 +13,9 @@ IceSSL.CAs=ice-ca.crt
 
 IceSSL.TrustOnly.Server=CN="the-client"
 IceSSL.TrustOnly.Client=
-IceSSL.VerifyPeer.Server=2
+
+# Note this feature was not submitted to upstream since CheckCertName=0 is the default and
+# this works for FreeBSD/OpenSSL (my use case).
+# IceSSL.VerifyPeer.Server=2
 
 IceSSL.Trace.Security=1

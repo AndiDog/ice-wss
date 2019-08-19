@@ -16,8 +16,11 @@ IceSSL.CAs=ice-ca.crt
 # Test new SNI feature
 IceSSL.Trace.Security=1
 IceSSL.ServerNameIndication=1
-# if peer certificate's CN/subjectAltName doesn't match the hostname but is an invented name,
-# disable peer hostname verification (`IceSSL.TrustOnly*` will still apply)
-IceSSL.VerifyPeer.Client=0
+
+# If peer certificate's CN/subjectAltName doesn't match the hostname but is an invented name,
+# disable peer hostname verification (`IceSSL.TrustOnly*` will still apply). Note this
+# feature was not submitted to upstream since CheckCertName=0 is the default and this works
+# for FreeBSD/OpenSSL (my use case).
+# IceSSL.VerifyPeer.Client=0
 
 IceSSL.TrustOnly.Client=CN="the-server"
