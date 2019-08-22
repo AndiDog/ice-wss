@@ -1,0 +1,11 @@
+# Different IceSSL config from C++
+
+Ice.Plugin.IceSSL=IceSSL:com.zeroc.IceSSL.PluginFactory
+
+# Disable Diffie-Hellman so Wireshark can be used to see decrypted traffic
+IceSSL.Ciphers=NONE TLS_RSA_WITH_AES_128_CBC_SHA
+
+IceSSL.Keystore=the-client.jks
+IceSSL.Truststore=ice-ca-trust.jks
+IceSSL.Password=longpassword
+IceSSL.TruststorePassword=longpassword

@@ -16,3 +16,8 @@ openssl req -config ${ca_name}.openssl.cnf -key ${ca_name}/private/ca.key -new -
 ./create-ice-cert.sh "${ca_name}" the-server
 ./create-ice-cert.sh "${ca_name}" the-server2 # for playing around with `IceSSL.TrustOnly*`
 ./create-ice-cert.sh "${ca_name}" the-client
+
+# Java (key store requires password of at least 6 characters)
+openssl pkcs12 -export -certfile ice-ca.crt -in the-client.crt -inkey the-client.key -out the-client.longpassword.p12 -passin pass:dummy -passout pass:longpassword
+echo yes | keytool -v -importcert -file ice-ca.crt -destkeystore ice-ca-trust.jks -storepass longpassword
+echo longpassword | keytool -v -importkeystore -srckeystore the-client.longpassword.p12 -srcstoretype PKCS12 -destkeystore the-client.jks -deststoretype JKS -storepass longpassword
