@@ -31,16 +31,16 @@ LDFLAGS+= -lIceUtil
 endif
 
 slice-cpp:
-	@$(ICE_HOME)/bin/slice2cpp Demo.ice
+	@$(ICE_HOME)/bin/slice2cpp --output-dir cpp Demo.ice
 
 slice-java:
 	@$(ICE_HOME)/bin/slice2java --output-dir java Demo.ice
 
 build-server: slice-cpp
-	@$(CXX) $(CXXFLAGS) $(LDFLAGS) Demo.cpp DemoServiceI.cpp -shared -o libDemoService.so
+	@cd cpp && $(CXX) $(CXXFLAGS) $(LDFLAGS) Demo.cpp DemoServiceI.cpp -shared -o libDemoService.so
 
 build-client-cpp: slice-cpp
-	@$(CXX) $(CXXFLAGS) $(LDFLAGS) DemoClientApp.cpp Demo.cpp -o DemoClientApp
+	@cd cpp && $(CXX) $(CXXFLAGS) $(LDFLAGS) DemoClientApp.cpp Demo.cpp -o DemoClientApp
 
 build-client-java: slice-java
 	@cd java \
@@ -49,11 +49,11 @@ build-client-java: slice-java
 
 client: build-client-cpp
 	@echo "Starting client (WS)"
-	@DYLD_PRINT_LIBRARIES=YES LD_LIBRARY_PATH=.:$(ICE_HOME)/lib ./DemoClientApp --Ice.Config=config.client
+	@DYLD_PRINT_LIBRARIES=YES LD_LIBRARY_PATH=.:$(ICE_HOME)/lib cpp/DemoClientApp --Ice.Config=config.client
 
 client-wss: build-client-cpp
 	@echo "Starting client (WSS)"
-	@DYLD_PRINT_LIBRARIES=YES LD_LIBRARY_PATH=.:$(ICE_HOME)/lib ./DemoClientApp --Ice.Config=config.client,config.client-wss
+	@DYLD_PRINT_LIBRARIES=YES LD_LIBRARY_PATH=.:$(ICE_HOME)/lib cpp/DemoClientApp --Ice.Config=config.client,config.client-wss
 
 client-wss-java: build-client-java
 	@echo "Starting client (WSS, Java)"
@@ -61,11 +61,11 @@ client-wss-java: build-client-java
 
 server: kill build-server
 	@echo "Starting server (WS)"
-	@DYLD_PRINT_LIBRARIES=YES LD_LIBRARY_PATH=.:$(ICE_HOME)/lib $(ICE_HOME)/bin/icebox --Ice.Config=config.icebox
+	@DYLD_PRINT_LIBRARIES=YES LD_LIBRARY_PATH=cpp:$(ICE_HOME)/lib $(ICE_HOME)/bin/icebox --Ice.Config=config.icebox
 
 server-wss: kill build-server
 	@echo "Starting server (WSS)"
-	@DYLD_PRINT_LIBRARIES=YES LD_LIBRARY_PATH=.:$(ICE_HOME)/lib $(ICE_HOME)/bin/icebox --Ice.Config=config.icebox,config.icebox-wss
+	@DYLD_PRINT_LIBRARIES=YES LD_LIBRARY_PATH=cpp:$(ICE_HOME)/lib $(ICE_HOME)/bin/icebox --Ice.Config=config.icebox,config.icebox-wss
 
 hosts-entry:
 	@grep -wq the-server /etc/hosts || printf "\n# From %s\n127.0.0.1 the-server\n" "$$(pwd)" | sudo tee -a /etc/hosts
@@ -76,7 +76,7 @@ kill:
 
 clean:
 	@echo "Remove all generated files"
-	@rm -vf Demo.h Demo.cpp libDemoService.so DemoClientApp *~
+	@cd cpp && rm -vf Demo.h Demo.cpp libDemoService.so DemoClientApp *~
 	@cd java && rm -vrf DemoModule && find . -name \*.class -exec rm -v {} \;
 
 .PHONY: build-client-cpp
