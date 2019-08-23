@@ -21,3 +21,6 @@ openssl req -config ${ca_name}.openssl.cnf -key ${ca_name}/private/ca.key -new -
 openssl pkcs12 -export -certfile ice-ca.crt -in the-client.crt -inkey the-client.key -out the-client.longpassword.p12 -passin pass:dummy -passout pass:longpassword
 echo yes | keytool -v -importcert -file ice-ca.crt -destkeystore ice-ca-trust.jks -storepass longpassword
 echo longpassword | keytool -v -importkeystore -srckeystore the-client.longpassword.p12 -srcstoretype PKCS12 -destkeystore the-client.jks -deststoretype JKS -storepass longpassword
+
+# Copy because symlinks not available on Windows
+cp ice-ca/ca.crt ice-ca.crt
