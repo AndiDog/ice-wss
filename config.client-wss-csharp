@@ -1,0 +1,2 @@
+# Overridden from Makefile
+Ice.Plugin.IceSSL=PLEASE-OVERWRITE-WITH-FULL-ICE-SSL-DLL-PATH:IceSSL.PluginFactory

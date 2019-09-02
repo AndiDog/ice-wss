@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="Ice">
+      <HintPath>../../../ice/csharp/bin/netcoreapp2.1/Ice.dll</HintPath>
+    </Reference>
+    <Reference Include="IceSSL">
+      <HintPath>../../../ice/csharp/bin/netcoreapp2.1/IceSSL.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="../Demo.cs" Link="Demo.cs" />
+  </ItemGroup>
+
+</Project>

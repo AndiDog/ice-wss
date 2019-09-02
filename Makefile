@@ -33,6 +33,9 @@ endif
 slice-cpp:
 	@$(ICE_HOME)/bin/slice2cpp --output-dir cpp Demo.ice
 
+slice-csharp:
+	@$(ICE_HOME)/bin/slice2cs --output-dir csharp Demo.ice
+
 slice-java:
 	@$(ICE_HOME)/bin/slice2java --output-dir java Demo.ice
 
@@ -41,6 +44,9 @@ build-server: slice-cpp
 
 build-client-cpp: slice-cpp
 	@cd cpp && $(CXX) $(CXXFLAGS) $(LDFLAGS) DemoClientApp.cpp Demo.cpp -o DemoClientApp
+
+build-client-csharp: slice-csharp
+	@cd csharp/client && dotnet build
 
 build-client-java: slice-java
 	@cd java \
@@ -54,6 +60,10 @@ client: build-client-cpp
 client-wss: build-client-cpp
 	@echo "Starting client (WSS)"
 	@DYLD_PRINT_LIBRARIES=YES LD_LIBRARY_PATH=.:$(ICE_HOME)/lib cpp/DemoClientApp --Ice.Config=config.client,config.client-wss
+
+client-wss-csharp: build-client-csharp
+	@echo "Starting client (WSS, C#)"
+	@dotnet run --no-build --no-restore -p csharp/client -- --Ice.Config=config.client,config.client-wss,config.client-wss-csharp --Ice.Plugin.IceSSL=$(ICE_HOME)/../csharp/bin/netcoreapp2.1/IceSSL.dll:IceSSL.PluginFactory
 
 client-wss-java: build-client-java
 	@echo "Starting client (WSS, Java)"
@@ -77,6 +87,7 @@ kill:
 clean:
 	@echo "Remove all generated files"
 	@cd cpp && rm -vf Demo.h Demo.cpp libDemoService.so DemoClientApp *~
+	@cd csharp && rm -vrf Demo.cs client/bin client/obj
 	@cd java && rm -vrf DemoModule && find . -name \*.class -exec rm -v {} \;
 
 .PHONY: build-client-cpp
