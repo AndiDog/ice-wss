@@ -1,0 +1,13 @@
+# Different IceSSL config from C++
+
+# IceSSL included in ice.jar as of
+# https://doc.zeroc.com/ice/3.7/ice-plugins/icessl/using-icessl#id-.UsingIceSSLv3.7-JavaApplications
+Ice.Plugin.IceSSL=IceSSL.PluginFactory
+
+# Disable Diffie-Hellman so Wireshark can be used to see decrypted traffic
+IceSSL.Ciphers=NONE TLS_RSA_WITH_AES_128_CBC_SHA
+
+IceSSL.Keystore=the-client.jks
+IceSSL.Truststore=ice-ca-trust.jks
+IceSSL.Password=longpassword
+IceSSL.TruststorePassword=longpassword
